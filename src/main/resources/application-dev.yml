@@ -1,0 +1,9 @@
+#通过@Value获取文件中的配置信息
+text: 开发信息
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3309/forum?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: lzh123

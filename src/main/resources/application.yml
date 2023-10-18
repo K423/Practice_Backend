@@ -1,0 +1,50 @@
+#配置端口号
+server:
+  port: 1234
+
+# 选择运行环境
+spring:
+  profiles:
+    active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher  #配置路径防止swagger冲突
+  thymeleaf:
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    cache: false
+    suffix: .html
+  web:
+    resources:
+      static-locations: classpath:/static/
+  servlet:
+    multipart:
+      max-file-size: 512MB
+      max-request-size: 1024MB
+mybatis:
+  type-aliases-package: com.lzh.forum.mapper
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+img:
+  path: D:/Alex/IDEA/work/Forum/src/main/resources/static/img/
+
+#配置sql日志信息
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: classpath*:/mapper/**Mapper.xml  # 配置复杂sql语句xml文件位置
+
+# jwt 结构通常由三部分组成 头部(header)，载荷(payload)，签名(signature)
+# 头部包含指定算法和类型的信息
+# 载荷包含要传递的用户信息和其他声明
+# 签名用于校检的完整性
+#指定jwttoken所在的HTTP Header名称,这里是"token"
+#jwt token的过期时间,单位是秒,此处是604800秒,即7天
+# 签名jwt token所需的密钥,这里是"lzh123"
+#project:
+#  jwt:
+#    header:token
+#    expire:604800
+#    secret:lzh123

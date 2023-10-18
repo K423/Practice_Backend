@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzh.forum.mapper.ForumUserMapper">
+    <update id="updateById">
+        update forum_user
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="email != null  and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete">
+        delete
+        from forum_user
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getList" resultType="com.lzh.forum.entity.ForumUser">
+        select *
+        from forum_user
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%', #{name}, '%')
+            </if>
+            <!--            <if test="gender != null">-->
+            <!--                and gender = #{gender}-->
+            <!--            </if>-->
+            <!--            <if test="begin != null and end != null">-->
+            <!--                and entrydate between #{begin} and #{end}-->
+            <!--            </if>-->
+        </where>
+        order by create_time desc
+        limit #{page}, #{pageSize}
+    </select>
+    <select id="count" resultType="java.lang.Long">
+        select count(*)
+        from forum_user
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%', #{name}, '%')
+            </if>
+            <!--            <if test="gender != null">-->
+            <!--                and gender = #{gender}-->
+            <!--            </if>-->
+            <!--            <if test="begin != null and end != null">-->
+            <!--                and entrydate between #{begin} and #{end}-->
+            <!--            </if>-->
+        </where>
+    </select>
+</mapper>
